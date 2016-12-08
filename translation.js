@@ -1163,7 +1163,7 @@ function main(){
 
     getHeightOfDnaNucleotides();
 
-    // brownianMotionInit();   // if (!detectmob()){
+    // brownianMotionInit();   // if (!detectmob()){ 
 }
 
 
