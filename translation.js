@@ -16,6 +16,11 @@
 
 // background-color: #454E4F == 069078079,  #454C4C == 069076076
 
+// Translaton hvor codon og hele tRNA fylder det samme:
+// http://hyperphysics.phy-astr.gsu.edu/hbase/Organic/translation.html
+// http://classes.midlandstech.edu/carterp/Courses/bio225/chap08/Microbial%20Genetics%203.htm
+
+
 
 var bioObj = {
         
@@ -33,10 +38,10 @@ var bioObj = {
         },
         tRNA : {
             img: { 
-                A : {name:"Adenin", class:"adenin tRNA", src:"an.png"},
-                C : {name:"Cytosin",class:"cytosin tRNA", src:"cn.png"},
-                G : {name:"Guanin", class:"guanin tRNA", src:"gn.png"},
-                U : {name:"Thymin", class:"thymin tRNA", src:"tn.png"}
+                A : {name:"Adenin", class:"adenin mRNA", src: {down: 'ao.png', up: 'an.png'}},
+                C : {name:"Cytosin",class:"cytosin mRNA", src: {down: 'co.png', up: 'cn.png'}},
+                G : {name:"Guanin", class:"guanin mRNA", src: {down: 'go.png', up: 'gn.png'}},
+                U : {name:"Uracil", class:"uracil mRNA", src: {down: 'uo.png', up: 'un.png'}}
             },
             U : {
                 U: {
@@ -219,7 +224,7 @@ function brownianMotion3(n, duration, length){
 
             var randDeg = Math.round(180*(Math.random()-0.5));
 
-            $( '#draggable_neucleotide_'+n ).animate({
+            $( '#draggable_tRNA_'+n ).animate({
                     left: dObj.moveObjArr[n].animationInfo.x,
                     top: dObj.moveObjArr[n].animationInfo.y,
                     // step: function(now) {  // http://stackoverflow.com/questions/15191058/css-rotation-cross-browser-with-jquery-animate
@@ -236,13 +241,13 @@ function brownianMotion3(n, duration, length){
                     
                     // step: function(){
                     //     var randDeg = Math.round(180*(Math.random()-0.5));
-                    //     $('#draggable_neucleotide_'+n).animate(
+                    //     $('#draggable_tRNA_'+n).animate(
                     //         {rotation: 360},
                     //         {
                     //             // duration: 'slow',
                     //             duration: 2*dObj.moveObjArr[n].animationInfo.duration,
                     //             step: function(now, fx) {
-                    //                 $('#draggable_neucleotide_'+n).css({"transform": "rotate("+randDeg+"deg)"});
+                    //                 $('#draggable_tRNA_'+n).css({"transform": "rotate("+randDeg+"deg)"});
                     //             }
                     //         }
                     //     );
@@ -258,13 +263,13 @@ function brownianMotion3(n, duration, length){
                             'transform': 'rotate('+dObj.moveObjArr[n].animationInfo.angel+'deg)' 
                     });
 
-                    // $('#draggable_neucleotide_'+n).animate(                // <---- Virker godt knap så godt med animate i x og y
+                    // $('#draggable_tRNA_'+n).animate(                // <---- Virker godt knap så godt med animate i x og y
                     //     {rotation: 360},
                     //     {
                     //         // duration: 'slow',
                     //         duration: 2*dObj.moveObjArr[n].animationInfo.duration,
                     //         step: function(now, fx) {
-                    //             $('#draggable_neucleotide_'+n).css({"transform": "rotate("+randDeg+"deg)"});
+                    //             $('#draggable_tRNA_'+n).css({"transform": "rotate("+randDeg+"deg)"});
                     //         }
                     //     }
                     // );
@@ -275,20 +280,20 @@ function brownianMotion3(n, duration, length){
 
             // setInterval(function(){ 
             //     var randDeg = Math.round(180*(Math.random()-0.5));
-            //     $('#draggable_neucleotide_'+n).css({                                         
+            //     $('#draggable_tRNA_'+n).css({                                         
             //             '-moz-transform': 'rotate('+randDeg+'deg)',
             //             '-webkit-transform': 'rotate('+randDeg+'deg)',
             //             'transform': 'rotate('+randDeg+'deg)' 
             //     });
             // }, 1000);
 
-            // $('#draggable_neucleotide_'+n).animate(              
+            // $('#draggable_tRNA_'+n).animate(              
             //     {rotation: 360},
             //     {
             //         // duration: 'slow',
             //         duration: 2*dObj.moveObjArr[n].animationInfo.duration,
             //         step: function(now, fx) {
-            //             $('#draggable_neucleotide_'+n).css({"transform": "rotate("+randDeg+"deg)"});
+            //             $('#draggable_tRNA_'+n).css({"transform": "rotate("+randDeg+"deg)"});
             //         }
             //     }
             // );
@@ -302,12 +307,12 @@ function brownianMotion3(n, duration, length){
 
 function giveFeedback(valid, id, callBack){
     
-    // var id = $(this).prop('id').replace('draggable_neucleotide_','');
+    // var id = $(this).prop('id').replace('draggable_tRNA_','');
 
 
     dObj.moveObjArr[id].brownianMotion = false;
 
-    $('#draggable_neucleotide_'+id).animate({
+    $('#draggable_tRNA_'+id).animate({
             left: dObj.xPos,
             top: dObj.yPos,
             duration: 0
@@ -315,7 +320,7 @@ function giveFeedback(valid, id, callBack){
         
     });
 
-    // $('#draggable_neucleotide_'+id).css({left: dObj.xPos, top: dObj.yPos});
+    // $('#draggable_tRNA_'+id).css({left: dObj.xPos, top: dObj.yPos});
     console.log('giveFeedback - id: ' + id);
 
     var HTML = 'Du skal anvende baseparringsprincippet kendt fra DNA replikation, men med den undtagelse at uracil erstatter thymin i mRNA. Dvs: cytosin (C) parres med guanin (G) og uracil (U) parres med thymin (T).';
@@ -342,10 +347,10 @@ function giveFeedback(valid, id, callBack){
 
 function getHeightOfDnaNucleotides(){
     window.heigtObj = {};
-    heigtObj.adenin = $(".basePairWrap .adenin img").height();
-    heigtObj.cytosin = $(".basePairWrap .cytosin img").height();
-    heigtObj.guanin = $(".basePairWrap .guanin img").height();
-    heigtObj.thymin = $(".basePairWrap .thymin img").height();
+    heigtObj.adenin = $(".codonAntiCodonWrap .adenin img").height();
+    heigtObj.cytosin = $(".codonAntiCodonWrap .cytosin img").height();
+    heigtObj.guanin = $(".codonAntiCodonWrap .guanin img").height();
+    heigtObj.thymin = $(".codonAntiCodonWrap .thymin img").height();
     console.log('getHeightOfDraggableNucleotides - adenin: ' + heigtObj.adenin + ', cytosin: ' + heigtObj.cytosin + ', guanin: ' + heigtObj.guanin + ', thymin: ' + heigtObj.thymin);   
 }
 
@@ -442,44 +447,48 @@ function anmateDnaMovement(){
     console.log('anmateDnaMovement - currentNucleotide: ' + dObj.currentNucleotide);
 
     // Only if the student is NOT finished with the execise, then...
-    if (dObj.currentNucleotide < dObj.dnaArr.length){ // Only if currentNucleotide < dnaArr.length  <===> the student is NOT finished with the execise, then...
+    // if (dObj.currentNucleotide < dObj.mRnaArr.length){ // Only if currentNucleotide < dnaArr.length  <===> the student is NOT finished with the execise, then...   
+    if (dObj.currentCodon < dObj.numOfCodons){
 
-        // var TemplateNucleotide = bioObj.dna[complementaryDnaBase(dObj.dnaArr[dObj.currentNucleotide])].name.toLowerCase();
+        // var TemplateNucleotide = bioObj.dna[complementaryDnaBase(dObj.mRnaArr[dObj.currentNucleotide])].name.toLowerCase();
         // console.log('anmateDnaMovement - TemplateNucleotide: ' + TemplateNucleotide);
 
-        // var TemplateNucleotide = bioObj.dna[complementaryDnaBase(dObj.dnaArr[dObj.currentNucleotide])].name.toLowerCase();
+        // var TemplateNucleotide = bioObj.dna[complementaryDnaBase(dObj.mRnaArr[dObj.currentNucleotide])].name.toLowerCase();
         // console.log('anmateDnaMovement - TemplateNucleotide: ' + TemplateNucleotide);
 
         // var ImgHeight_tmplStrand = heigtObj.TemplateNucleotide;
         // var ImgHeight_tmplStrand
         // console.log('anmateDnaMovement - height: ' + height);
 
-        $('#translationContainer').append(returnDnaBasePair(dObj.currentNucleotide));  // <----- Append the new basepair - then set the width to 0%!!!
-        $(".basePairWrap:last").css({width: '0%'});
+        // $('#translationContainer').append(returnDnaBasePair(dObj.currentNucleotide));  // <----- Append the new basepair - then set the width to 0%!!!
+        console.log('anmateDnaMovement - dObj.currentCodon: ' + dObj.currentCodon + '\ndObj.codonArr[dObj.currentCodon]): ' + dObj.codonArr[dObj.currentCodon]);
+        $('#translationContainer').append(returnCodonAntiCodonWrap(dObj.codonArr[dObj.currentCodon]));  // <----- Append the new basepair - then set the width to 0%!!!
+        $(".codonAntiCodonWrap:last").css({width: '0%'});
 
-        $(".basePairWrap:last").animate({
+        $(".codonAntiCodonWrap:last").animate({
             // width: '5%',
-            width: '2.5%',
+            // width: '2.5%',
+            width: '20%',
             // backgroundColor: '#F00',
             duration: 400
         }, function(){
             
         });
 
-        var height1 = $(".basePairWrap .codingStrand img").eq(0).height();
+        var height1 = $(".codonAntiCodonWrap .mRNA img").eq(0).height();
         console.log('anmateDnaMovement - height1: ' + height1);
-        var height2 = $(".basePairWrap .templateStrand img").eq(0).height();
+        var height2 = $(".codonAntiCodonWrap .templateStrand img").eq(0).height();
         console.log('anmateDnaMovement - height2: ' + height2);
 
-        $(".basePairWrap:first .codingStrand img").height(height1+'px');
-        $(".basePairWrap:first .templateStrand img").height(height2+'px');
+        $(".codonAntiCodonWrap:first .mRNA img").height(height1+'px');
+        $(".codonAntiCodonWrap:first .templateStrand img").height(height2+'px');
 
-        $(".basePairWrap:first").eq(0).animate({
+        $(".codonAntiCodonWrap:first").eq(0).animate({
             width: '0%',
             duration: 400
         }, function(){
 
-            $(this).remove();      // Removes the first .basePairWrap
+            $(this).remove();      // Removes the first .codonAntiCodonWrap
 
             // $('.draggable_neucleotide').fadeOut(function(){                                      // Commented out 30-11-2016: FR does not want new neucleotides anymore, only replacement of the old ones. See all places with MARK (#4#).
                 
@@ -503,7 +512,7 @@ function anmateDnaMovement(){
         // brownianMotion3(dObj.idOfLastMovedNeucleotide, dObj.duration, dObj.length);  // This is needed to make the correctly dropped neucleotide move again AFTER is has been added by the lines above. 
 
 
-        // $(".basePairWrap").eq(0).animate({
+        // $(".codonAntiCodonWrap").eq(0).animate({
         //     marginLeft: '-5%',
         //     opacity: '0',
         //     duration: 5000
@@ -538,16 +547,13 @@ function setEventhandlers(){
         $('#yCord_rel').html(event.pageY - translationContainer_pos.top);
     });
 
-    $( ".draggable_tRNA" ).draggable({
 
-    });
-
-    $( ".draggable_neucleotide" ).draggable({
+    $( ".XXX_draggable_tRNA" ).draggable({
 
         revert: function(valid) {
             console.log('card - REVERT');
 
-            var id = $(this).prop('id').replace('draggable_neucleotide_','');   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
+            var id = $(this).prop('id').replace('draggable_tRNA_','');   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
             console.log('draggable_neucleotide - mousedown - id: ' + id);
 
             dObj.idOfLastMovedNeucleotide = id;
@@ -562,14 +568,14 @@ function setEventhandlers(){
                 // dObj.moveObjArr[id].brownianMotion = false;   // Commented out 30-11-2016: FR does not want new neucleotides anymore, only replacement of the old ones. See all places with MARK (#4#).
 
                 // TEST TIL KOPIERING:
-                // <div class="neucleotide correct_mRNA adenin mRNA mRNA_string"><img class="img-responsive" src="img/am.png"></div>
-                // <div class="neucleotide correct_mRNA cytosin mRNA mRNA_string"><img class="img-responsive" src="img/cm.png"></div>
-                // <div class="neucleotide correct_mRNA guanin mRNA mRNA_string"><img class="img-responsive" src="img/gm.png"></div>
-                // <div class="neucleotide correct_mRNA uracil mRNA mRNA_string"><img class="img-responsive" src="img/um.png"></div>
+                // <div class="neucleotide correct_tRNA adenin mRNA mRNA_string"><img class="img-responsive" src="img/am.png"></div>
+                // <div class="neucleotide correct_tRNA cytosin mRNA mRNA_string"><img class="img-responsive" src="img/cm.png"></div>
+                // <div class="neucleotide correct_tRNA guanin mRNA mRNA_string"><img class="img-responsive" src="img/gm.png"></div>
+                // <div class="neucleotide correct_tRNA uracil mRNA mRNA_string"><img class="img-responsive" src="img/um.png"></div>
 
                 // if (dObj.isCurrentDraggableCorrect){    // <---------  THIS DOES NOT WORK!!!!
                 //     console.log('isCurrentDraggableCorrect: '+dObj.isCurrentDraggableCorrect+' - HIDE');
-                //     $('#draggable_neucleotide_'+id).hide();
+                //     $('#draggable_tRNA_'+id).hide();
                 // }
 
 
@@ -616,7 +622,7 @@ function setEventhandlers(){
                     // alert("Reverting!");  // <----- EN HELT ALMINDELIG ALERT VIRKER!!!
 
 
-                    var id = $(this).prop('id').replace('draggable_neucleotide_','');
+                    var id = $(this).prop('id').replace('draggable_tRNA_','');
                     console.log('card - REVERT - id: ' + id);
                     dObj.moveObjArr[id].brownianMotion = true;
                     $(this).width(dObj.moveObjArr[id].width);    // Re-ajust the width, since JQuery wants to set a new width
@@ -643,13 +649,13 @@ function setEventhandlers(){
         start: function(event, ui) {
             console.log('card - START');
 
-            // var id = $(this).prop('id').replace('draggable_neucleotide_','');
-            // $('#draggable_neucleotide_'+id).draggable( "option", "revert", false );   // <--- 28-10-2016: Dette virker (dvs "revert" slås fra), men det er så ikke muligt at tjekke svar!
+            // var id = $(this).prop('id').replace('draggable_tRNA_','');
+            // $('#draggable_tRNA_'+id).draggable( "option", "revert", false );   // <--- 28-10-2016: Dette virker (dvs "revert" slås fra), men det er så ikke muligt at tjekke svar!
 
             var baseClass = $(this).attr('class');
             console.log('start - baseClass: ' + baseClass);
 
-            dObj.isCurrentDraggableCorrect = (baseClass.indexOf('correct_mRNA') !== -1)? true : false;
+            dObj.isCurrentDraggableCorrect = (baseClass.indexOf('correct_tRNA') !== -1)? true : false;
             console.log('start - dObj: ' + JSON.stringify(dObj));
 
             for (var n in bioObj.mRNA){
@@ -662,10 +668,10 @@ function setEventhandlers(){
         stop: function(event, ui) {
             console.log('card - STOP');
 
-            var id = $(this).prop('id').replace('draggable_neucleotide_','');  
+            var id = $(this).prop('id').replace('draggable_tRNA_','');  
             console.log('card - DRAG - id: ' + id);
 
-            // $('#draggable_neucleotide_'+id).draggable( "option", "revert", true );
+            // $('#draggable_tRNA_'+id).draggable( "option", "revert", true );
 
             
             // dObj.moveObjArr[id].animationInfo.drag = false;
@@ -704,14 +710,14 @@ function setEventhandlers(){
 
             // if (dObj.isCurrentDraggableCorrect){   // <---------  THIS DOES NOT WORK!!!!
             //     console.log('isCurrentDraggableCorrect: '+dObj.isCurrentDraggableCorrect+' - SHOW');
-            //     $('#draggable_neucleotide_'+id).show();
+            //     $('#draggable_tRNA_'+id).show();
             // }
 
         },
         drag: function(event, ui) {
             console.log('card - DRAG');
 
-            var id = $(this).prop('id').replace('draggable_neucleotide_','');  
+            var id = $(this).prop('id').replace('draggable_tRNA_','');  
             console.log('card - DRAG - id: ' + id);
 
             var offset = $(this).position();
@@ -722,7 +728,7 @@ function setEventhandlers(){
             // dObj.moveObjArr[id].animationInfo.drag = true;
 
 
-            // var id = $(this).prop('id').replace('draggable_neucleotide_','');  // <------- MARK (#3b#) - IMPORTANT: This is not good - (#3a#) is better. The reason is that if the user 
+            // var id = $(this).prop('id').replace('draggable_tRNA_','');  // <------- MARK (#3b#) - IMPORTANT: This is not good - (#3a#) is better. The reason is that if the user 
             // console.log('card - DRAG - id: ' + id);
             // dObj.moveObjArr[id].brownianMotion = false;
             
@@ -735,8 +741,14 @@ function setEventhandlers(){
         }
     });
 
+    
+    $( ".draggable_tRNA" ).draggable({
+
+    });
+
+
     $( "#dropZone" ).droppable({
-        accept: ".correct_mRNA",
+        accept: ".correct_tRNA",
 
         drop: function(event, ui) {
             console.log('card - DROP');
@@ -751,7 +763,7 @@ function setEventhandlers(){
     //      (2)  If you only perform a mousedown action (but not a drag), then the size (width and height) of the neucleotide may be altered due to the movement.
     $(document).on('mousedown', ".draggable_neucleotide", function(event) {
         console.log('draggable_neucleotide - mousedown - CALLED');
-        var id = $(this).prop('id').replace('draggable_neucleotide_','');   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
+        var id = $(this).prop('id').replace('draggable_tRNA_','');   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
         console.log('draggable_neucleotide - mousedown - id: ' + id);
         dObj.moveObjArr[id].brownianMotion = false;
         dObj.moveObjArr[id].animationInfo.mousedown = true;
@@ -772,7 +784,7 @@ function setEventhandlers(){
     // $(document).on('mouseup', ".draggable_neucleotide", function(event) {  // translationContainer
     $(document).on('mouseup', ".draggable_neucleotide", function(event) {
         console.log('draggable_neucleotide - mouseup - CALLED');
-        var id = $(this).prop('id').replace('draggable_neucleotide_','');   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
+        var id = $(this).prop('id').replace('draggable_tRNA_','');   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
         console.log('draggable_neucleotide - mouseup - id: ' + id);
 
         // dObj.moveObjArr[id].brownianMotion = true;  // 24-10-2016 - This causes a problem if the it is the correct neucleotide!
@@ -818,41 +830,76 @@ function setEventhandlers(){
 
 
 function complementaryDnaBase(base){
-    var compBase = {"A":"T", "T":"A", "G":"C", "C":"G" };
+    // var compBase = {"A":"T", "T":"A", "G":"C", "C":"G" };
+    var compBase = {"A":"U", "U":"A", "G":"C", "C":"G" };
+    return compBase[base];
+}
+
+function makeAntiCodon(codon){
+    // var compBase = {"A":"T", "T":"A", "G":"C", "C":"G" };
+    var compBase = {"A":"U", "U":"A", "G":"C", "C":"G" };
     return compBase[base];
 }
 
 
 function returnDnaBasePair(n){
-    console.log('returnDnaBasePair - n: ' + n + ', dnaArr['+n+']' + dObj.dnaArr[n] + ', bioObj.dna[dObj.dnaArr['+n+']].name: ' + bioObj.dna[dObj.dnaArr[n]].name + ', dna[complementaryDnaBase(dObj.dnaArr['+n+'])].name: ' + bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].name);
-    return '<div class="basePairWrap"><div class="neucleotide codingStrand '+bioObj.dna[dObj.dnaArr[n]].class+'"><img class="img-responsive" src="img/'+bioObj.dna[dObj.dnaArr[n]].src.codingStrand+'"></div>  <div class="templateStrandWrap"><div class="neucleotide templateStrand '+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].class+'"><img class="img-responsive" src="img/'+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].src.templateStrand+'"></div></div></div>';    
+    console.log('returnDnaBasePair - n: ' + n + ', dnaArr['+n+']' + dObj.mRnaArr[n] + ', bioObj.dna[dObj.mRnaArr['+n+']].name: ' + bioObj.tRNA.img[dObj.mRnaArr[n]].name + ', dna[complementaryDnaBase(dObj.mRnaArr['+n+'])].name: ' + bioObj.tRNA.img[complementaryDnaBase(dObj.mRnaArr[n])].name);
+    return '<div class="codonAntiCodonWrap"><div class="neucleotide '+bioObj.tRNA.img[dObj.mRnaArr[n]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[dObj.mRnaArr[n]].src.down+'"></div>  <div class="templateStrandWrap"><div class="neucleotide templateStrand '+bioObj.tRNA.img[complementaryDnaBase(dObj.mRnaArr[n])].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[complementaryDnaBase(dObj.mRnaArr[n])].src.up+'"></div></div></div>';    
 }
 
 
-function initTransription(){
+function returnCodonAntiCodonWrap(codon){
+    var HTML = '';
+    HTML += '<div class="codonAntiCodonWrap">';    
+    HTML +=     '<div class="neucleotide '+bioObj.tRNA.img[codon[0]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[codon[0]].src.down+'"></div>';
+    HTML +=     '<div class="neucleotide '+bioObj.tRNA.img[codon[1]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[codon[1]].src.down+'"></div>';
+    HTML +=     '<div class="neucleotide '+bioObj.tRNA.img[codon[2]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[codon[2]].src.down+'"></div>';
+    HTML += '</div>'; 
+    return HTML;
+}
 
-    // dObj.dnaArr = dna.split('');  
-    dObj.dnaArr = jsonData.codingStrand.split('');
-    console.log('initTransription - dnaArr: ' + dObj.dnaArr);
+
+function initTranslation(){
+
+    // dObj.mRnaArr = dna.split('');  
+    dObj.mRnaArr = jsonData.mRNA.split('');
+    console.log('initTranslation - dnaArr: ' + dObj.mRnaArr);
 
     $('#translationContainer').html('');  // Clear all content in the event the user wants to try again.
 
     var HTML = '';
-    HTML += '<img class="backgroundImg img-responsive" src="img/ellipse.png">';
+    HTML += '<img class="backgroundImg img-responsive" src="img/BG_translation.jpg">';
     HTML += '<div class="fadeOut fadeOut_left"></div>';
     HTML += '<div id="dropZone"></div>';
-    // for (var n in dObj.dnaArr){
-    for (var n = 0; n < 20; n++) {
-        // HTML += '<div class="neucleotideWrap"><div class="neucleotide codingStrand '+bioObj.dna[dObj.dnaArr[n]].class+'">'+dObj.dnaArr[n]+'</div></div>';
-        // HTML += '<div class="basePairWrap"><div class="neucleotide complementaryStrand '+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].class+'">'+complementaryDnaBase(dObj.dnaArr[n])+'</div><div class="neucleotide codingStrand '+bioObj.dna[dObj.dnaArr[n]].class+'">'+dObj.dnaArr[n]+'</div></div>';
-        // HTML += '<div class="basePairWrap"><div class="neucleotide templateStrand '+bioObj.dna[dObj.dnaArr[n]].class+'">'+dObj.dnaArr[n]+'</div><div class="neucleotide codingStrand '+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].class+'">'+complementaryDnaBase(dObj.dnaArr[n])+'</div></div>'; 
-        // HTML += '<div class="basePairWrap"><div class="neucleotide codingStrand '+bioObj.dna[dObj.dnaArr[n]].class+'"><img class="img-responsive" src="img/'+bioObj.dna[dObj.dnaArr[n]].src.codingStrand+'"></div><div class="neucleotide templateStrand '+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].class+'"><img class="img-responsive" src="img/'+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].src.templateStrand+'"></div></div>';    
+    // for (var n in dObj.mRnaArr){
+    
+    // for (var n = 0; n < 20; n++) {
         
-        // HTML += '<div class="basePairWrap"><div class="neucleotide codingStrand '+bioObj.dna[dObj.dnaArr[n]].class+'"><img class="img-responsive" src="img/'+bioObj.dna[dObj.dnaArr[n]].src.codingStrand+'"></div>  <div class="templateStrandWrap"><div class="neucleotide templateStrand '+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].class+'"><img class="img-responsive" src="img/'+bioObj.dna[complementaryDnaBase(dObj.dnaArr[n])].src.templateStrand+'"></div></div></div>';    
-        HTML += returnDnaBasePair(n);
+    //     HTML += returnDnaBasePair(n);
 
-        dObj.currentNucleotide = n;
-    }
+    //     dObj.currentNucleotide = n;
+    // }
+
+    dObj.codonArr = [];
+    var count = 0;
+    dObj.numOfCodons = Math.floor(dObj.mRnaArr.length/3);
+    console.log('initTranslation - dObj.numOfCodons: ' + dObj.numOfCodons);
+    // for (var i = 0; i < 14; i++) {
+    for (var i = 0; i < 14; i++) {
+        var codon = [];
+        for (var k = 0; k < 3; k++) {
+            codon.push(dObj.mRnaArr[count]);
+            ++count;
+            
+            // dObj.currentNucleotide = count;
+            dObj.currentCodon = i;
+        }
+        HTML += returnCodonAntiCodonWrap(codon);
+        dObj.codonArr.push(codon);
+    };
+    dObj.currentCodon = 14; //
+    console.log('initTranslation - dObj.codonArr: ' + JSON.stringify(dObj.codonArr) + ', dObj.currentCodon: ' + dObj.currentCodon);
+
     HTML += '<div class="fadeOut fadeOut_right"></div>';
     // HTML += '<div class="Clear"></div>';
     return HTML;
@@ -864,7 +911,7 @@ function correctmRnaNucleotide(){
 
     // var startNeucleotideNo = Math.round(20 * 50/100); // <---- 20 neucleotide in the x-direction times 50% = 50/100, because this is the position of the dropZone i the x-direction.
     var startNeucleotideNo = dObj.currentNucleotide-9;  // <--- IPORTANT NOTE: "dObj.currentNucleotide" is always the right-most visible nucleotide (seen relative to the "dnaArr"), whereas startNeucleotideNo is almost in the center for the frame - therefore the "-9" ajustment is needed!
-    var neucleotideInDna = complementaryDnaBase(dObj.dnaArr[startNeucleotideNo]);
+    var neucleotideInDna = complementaryDnaBase(dObj.mRnaArr[startNeucleotideNo]);
     console.log('correctmRnaNucleotide - neucleotideInDna: ' + neucleotideInDna);
 
     var compBase = {"A":"U", "T":"A", "G":"C", "C":"G" };
@@ -926,18 +973,20 @@ function addDraggableNeucleotides(){
 
     var count = 0;
     var HTML = '';
+
     for (var n in bioObj.mRNA){
         console.log('addDraggableNeucleotides - n: ' + n);
-        // HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'">'+n+'</div>';
-        HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
+        // HTML += '<div id="draggable_tRNA_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_tRNA':'')+' '+bioObj.mRNA[n].class+'">'+n+'</div>';
+        HTML += '<div id="draggable_tRNA_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_tRNA':'')+' '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
         ++count;
     }
     for (var n in bioObj.mRNA){
         console.log('addDraggableNeucleotides - n: ' + n);
-        // HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'">'+n+'</div>';
-        HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
+        // HTML += '<div id="draggable_tRNA_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_tRNA':'')+' '+bioObj.mRNA[n].class+'">'+n+'</div>';
+        HTML += '<div id="draggable_tRNA_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_tRNA':'')+' '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
         ++count;
     }
+
     $('#translationContainer').append(HTML);
 
     console.log('addDraggableNeucleotides - count: ' + count);
@@ -954,14 +1003,14 @@ function addDraggableNeucleotides(){
         var x = Tvec.x;
         var y = Tvec.y;
         if (Math.random() <= 0.5){
-            $('#draggable_neucleotide_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
+            $('#draggable_tRNA_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
         } else {
             y = y + 70;
-            $('#draggable_neucleotide_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
+            $('#draggable_tRNA_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
         }
     
-        // var width = $('#draggable_neucleotide_'+i).width();
-        // var height = $('#draggable_neucleotide_'+i).height();
+        // var width = $('#draggable_tRNA_'+i).width();
+        // var height = $('#draggable_tRNA_'+i).height();
 
         // dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, angle:0, brownianMotion:true});
         // dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, width:'5%', height:'10%', brownianMotion:true, animationInfo: {x:x, y:y, angel:null, duration:null}});
@@ -970,7 +1019,7 @@ function addDraggableNeucleotides(){
 
         dObj.moveObjArr[i].animationInfo.angel += 45*(Math.random()-0.5);
 
-        $('#draggable_neucleotide_'+i).css({                                       
+        $('#draggable_tRNA_'+i).css({                                       
             '-moz-transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)',
             '-webkit-transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)',
             'transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)' 
@@ -988,16 +1037,16 @@ function movePriviousCorrectNeucleotideBackToOriginalPosition(){
 
     var id = dObj.idOfLastMovedNeucleotide;
 
-    // $('#draggable_neucleotide_'+id).remove(); // Remove the original 
+    // $('#draggable_tRNA_'+id).remove(); // Remove the original 
 
     console.log('movePriviousCorrectNeucleotideBackToOriginalPosition - dObj.isCurrentDraggableCorrect: ' + dObj.isCurrentDraggableCorrect);
 
     if (dObj.isCurrentDraggableCorrect){
         // var HTML = '';
-        // var nClass = $('#draggable_neucleotide_'+dObj.idOfLastMovedNeucleotide).prop('class');
+        // var nClass = $('#draggable_tRNA_'+dObj.idOfLastMovedNeucleotide).prop('class');
         // for (var n in bioObj.mRNA){
         //     if (nClass.indexOf(bioObj.mRNA[n].class)!==-1) {
-        //         HTML += '<div id="draggable_neucleotide_'+id+'" class="neucleotide draggable_neucleotide '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
+        //         HTML += '<div id="draggable_tRNA_'+id+'" class="neucleotide draggable_neucleotide '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
         //         break;
         //     }
         // }
@@ -1007,15 +1056,15 @@ function movePriviousCorrectNeucleotideBackToOriginalPosition(){
 
         dObj.moveObjArr[id].brownianMotion = true;
 
-        $('#draggable_neucleotide_'+id).css({position: 'absolute',top: String(dObj.moveObjArr[id].y)+'%', left: String(dObj.moveObjArr[id].x)+'%'});
+        $('#draggable_tRNA_'+id).css({position: 'absolute',top: String(dObj.moveObjArr[id].y)+'%', left: String(dObj.moveObjArr[id].x)+'%'});
 
-        $('#draggable_neucleotide_'+id).css({                                         
+        $('#draggable_tRNA_'+id).css({                                         
             '-moz-transform': 'rotate('+dObj.moveObjArr[id].animationInfo.angel+'deg)',
             '-webkit-transform': 'rotate('+dObj.moveObjArr[id].animationInfo.angel+'deg)',
             'transform': 'rotate('+dObj.moveObjArr[id].animationInfo.angel+'deg)' 
         });
 
-        $('#draggable_neucleotide_'+id).fadeIn();  // FadeIn the draggable neucleotide, which were hidden in MARK (#5#)
+        $('#draggable_tRNA_'+id).fadeIn();  // FadeIn the draggable neucleotide, which were hidden in MARK (#5#)
     }
 }
 
@@ -1029,11 +1078,11 @@ function insertCorrectDraggableClasses(){
     $( ".draggable_neucleotide" ).each(function( index, element ) {
         if ($(element).prop('class').indexOf(lookUp[correctmRnaNucleotide()].toLowerCase())!==-1){
             console.log('insertCorrectDraggableClasses - TRUE 1 - class: ' + $(element).prop('class'));
-            $(element).addClass('correct_mRNA');
+            $(element).addClass('correct_tRNA');
             console.log('insertCorrectDraggableClasses - TRUE 2 - class: ' + $(element).prop('class'));
         } else {
             console.log('insertCorrectDraggableClasses - FALSE - class: ' + $(element).prop('class'));
-            $(element).removeClass('correct_mRNA');
+            $(element).removeClass('correct_tRNA');
         }
     });
 }
@@ -1041,9 +1090,14 @@ function insertCorrectDraggableClasses(){
 
 function ajustScreenHight(){
     var width = $('#translationContainer').width();
-    $('#translationContainer').height(Math.round(9/16*width));
+    $('#translationContainer').height(Math.round(768/1170*width));
 }
 
+
+function ajust_tRNA_dimensions(){
+    var width = $('.draggable_tRNA').width();
+    $('.draggable_tRNA').height(Math.round(268/223*width));
+}
 
 
 //############################################################################################################################################################
@@ -1052,29 +1106,25 @@ function ajustScreenHight(){
 
 
 
-function tRNA_template(antiCodon){
+function tRNA_template(antiCodon, id, correct_tRNA){
     var HTML = '';
-    HTML += '<div class="draggable_tRNA">';
 
-    // HTML +=     '<div class="tRNA_body"><img class="img-responsive" src="img/tRNA_mod2.png"></div>';
-    // HTML +=     '<div class="tRNA_antiCodon_Wrap">';
-    // HTML +=         '<div class="antiCodon antiCodonBase1 '+bioObj.tRNA.img[antiCodon[0]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[0]].src+'"></div>';
-    // HTML +=         '<div class="antiCodon antiCodonBase2 '+bioObj.tRNA.img[antiCodon[1]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[1]].src+'"></div>';
-    // HTML +=         '<div class="antiCodon antiCodonBase3 '+bioObj.tRNA.img[antiCodon[2]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[2]].src+'"></div>';
-    // HTML +=     '</div>';
+    HTML += '<div id="draggable_tRNA_'+id+'" class="draggable_tRNA'+((correct_tRNA)?' correct_tRNA':'')+'">';
 
-    HTML +=     '<div class="tRNA_body">';
-    HTML +=         '<div class="tRNA_antiCodon_Wrap">';
-    HTML +=             '<div class="antiCodon antiCodonBase1 '+bioObj.tRNA.img[antiCodon[0]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[0]].src+'"></div>';
-    HTML +=             '<div class="antiCodon antiCodonBase2 '+bioObj.tRNA.img[antiCodon[1]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[1]].src+'"></div>';
-    HTML +=             '<div class="antiCodon antiCodonBase3 '+bioObj.tRNA.img[antiCodon[2]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[2]].src+'"></div>';
-    HTML +=         '</div>';
-    HTML +=         '<img class="img-responsive tRNA_img" src="img/tRNA_mod3.png">';
+    HTML +=     '<div class="tRNA_antiCodon_Wrap">';
+    HTML +=         '<div class="antiCodon antiCodonBase1 '+bioObj.tRNA.img[antiCodon[0]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[0]].src.up+'"></div>';
+    HTML +=         '<div class="antiCodon antiCodonBase2 '+bioObj.tRNA.img[antiCodon[1]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[1]].src.up+'"></div>';
+    HTML +=         '<div class="antiCodon antiCodonBase3 '+bioObj.tRNA.img[antiCodon[2]].class+'"><img class="img-responsive" src="img/'+bioObj.tRNA.img[antiCodon[2]].src.up+'"></div>';
     HTML +=     '</div>';
 
+    HTML +=     '<div class="tRNA_img_wrap">';
+    HTML +=         '<img class="img-responsive tRNA_img" src="img/tRNA.png">';
+    HTML +=     '</div>';
+    
+    HTML +=     '<div class="aminoAcid '+bioObj.tRNA[antiCodon[0]][antiCodon[1]][antiCodon[2]].name.toLowerCase()+'">'+bioObj.tRNA[antiCodon[0]][antiCodon[1]][antiCodon[2]].sym+'</div>';
     HTML += '</div>';
     
-    $('#translationContainer').append(HTML);
+    return HTML;
 }
 
 function addDraggable_tRNA(){
@@ -1082,58 +1132,134 @@ function addDraggable_tRNA(){
 
     var count = 0;
     var HTML = '';
-    for (var n in bioObj.mRNA){
-        console.log('addDraggableNeucleotides - n: ' + n);
-        // HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'">'+n+'</div>';
-        HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
-        ++count;
-    }
-    for (var n in bioObj.mRNA){
-        console.log('addDraggableNeucleotides - n: ' + n);
-        // HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'">'+n+'</div>';
-        HTML += '<div id="draggable_neucleotide_'+count+'" class="neucleotide draggable_neucleotide '+((n==correctmRnaNucleotide())?'correct_mRNA':'')+' '+bioObj.mRNA[n].class+'"><img class="img-responsive" src="img/'+bioObj.mRNA[n].src+'"></div>';
-        ++count;
-    }
+
+    var antiCodon = correctAntiCodon();
+
+    HTML += tRNA_template(antiCodon, count, true);
+    ++count;
+
+    // var antiCodonArr = makeWrongAntiCodonArr(5);
+    // console.log('addDraggableNeucleotides - antiCodonArr: ' + JSON.stringify(antiCodonArr));
+
+    // for (var n in antiCodonArr){
+    //     HTML += tRNA_template(antiCodonArr[n], count, false);
+    //     ++count;
+    // }
+
     $('#translationContainer').append(HTML);
 
     console.log('addDraggableNeucleotides - count: ' + count);
 
     dObj.moveObjArr = [];
-    for (var i = 0; i < count; i++) {
-        // var x = Math.round(Math.random()*90 + 5);
-        // var y = Math.round(Math.random()*15);
+    // for (var i = 0; i < count; i++) {
+    //     // var x = Math.round(Math.random()*90 + 5);
+    //     // var y = Math.round(Math.random()*15);
 
-        // var x = Math.round(Math.random()*90 + 5);  // <----- OK! 28-10-2016
-        // var y = Math.round(Math.random()*10 + 5);  // <----- OK! 28-10-2016
+    //     // var x = Math.round(Math.random()*90 + 5);  // <----- OK! 28-10-2016
+    //     // var y = Math.round(Math.random()*10 + 5);  // <----- OK! 28-10-2016
 
-        var Tvec = randomlySpacedVec();
-        var x = Tvec.x;
-        var y = Tvec.y;
-        if (Math.random() <= 0.5){
-            $('#draggable_neucleotide_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
-        } else {
-            y = y + 70;
-            $('#draggable_neucleotide_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
-        }
+    //     var Tvec = randomlySpacedVec();
+    //     var x = Tvec.x;
+    //     var y = Tvec.y;
+    //     // if (Math.random() <= 0.5){
+    //     //     $('#draggable_tRNA_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
+    //     // } else {
+    //         y = y + 30;
+    //         $('#draggable_tRNA_'+i).css({position: 'absolute',top: String(y)+'%', left: String(x)+'%'});
+    //     // }
     
-        // var width = $('#draggable_neucleotide_'+i).width();
-        // var height = $('#draggable_neucleotide_'+i).height();
+    //     // var width = $('#draggable_tRNA_'+i).width();
+    //     // var height = $('#draggable_tRNA_'+i).height();
 
-        // dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, angle:0, brownianMotion:true});
-        // dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, width:'5%', height:'10%', brownianMotion:true, animationInfo: {x:x, y:y, angel:null, duration:null}});
-        dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, width:'2.5%', height:'10%', brownianMotion:true, animationInfo: {x:x, y:y, angel:null, duration:null}});
+        
+    //     // dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, width:'2.5%', height:'10%', brownianMotion:true, animationInfo: {x:x, y:y, angel:null, duration:null}});
+    //     dObj.moveObjArr.push({neucleotideNo:i, x:x, y:y, width:'20%', height:'60%', brownianMotion:true, animationInfo: {x:x, y:y, angel:null, duration:null}});
 
 
-        dObj.moveObjArr[i].animationInfo.angel += 45*(Math.random()-0.5);
+    //     dObj.moveObjArr[i].animationInfo.angel += 45*(Math.random()-0.5);
 
-        $('#draggable_neucleotide_'+i).css({                                       
-            '-moz-transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)',
-            '-webkit-transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)',
-            'transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)' 
-        });
-    };
+    //     $('#draggable_tRNA_'+i).css({                                       
+    //         '-moz-transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)',
+    //         '-webkit-transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)',
+    //         'transform': 'rotate('+dObj.moveObjArr[i].animationInfo.angel+'deg)' 
+    //     });
+    // };
 
     console.log('addDraggableNeucleotides - dObj.moveObjArr: ' + JSON.stringify(dObj.moveObjArr));
+}
+
+
+function makeWrongAntiCodonArr(numOfWrong_tRNA){
+    var wrong_antiCodon_arr = [];
+
+    var antiCodon = correctAntiCodon();
+    for (var i = 0; i < numOfWrong_tRNA; i++) {
+        wrong_antiCodon_arr.push(pointMutation(antiCodon, wrong_antiCodon_arr));
+    };
+    console.log('makeWrongAntiCodonArr - wrong_antiCodon_arr: ' + JSON.stringify(wrong_antiCodon_arr));
+
+    return wrong_antiCodon_arr;
+}
+
+
+function pointMutation(codon, memCodonArr){
+    var base = ['A','C','G','U']; 
+    var c1 = codon;
+    var count = 0;
+    do {
+        var c2 = c1.slice(); // Copy the array...
+        var ni = Math.round(Math.random()*2); // Nucleotide index number
+        var nt = Math.round(Math.random()*3); // Nucleotide base
+        c2[ni] = base[nt];
+        console.log('pointMutation - count: ' + count + ', c1: ' + c1 + ', c2: ' + c2);
+        if (count > 50) {
+            break;
+        }
+        ++count;
+        // console.log('pointMutation - count: ' + count + ',bioObj.tRNA[c1[0]][c1[1]][c1[2]].name: ' + bioObj.tRNA[c1[0]][c1[1]][c1[2]].name + ', bioObj.tRNA[c2[0]][c2[1]][c2[2]].name: ' + bioObj.tRNA[c2[0]][c2[1]][c2[2]].name);
+    } while((c2[0]+c2[1]+c2[2] == c1[0]+c1[1]+c1[2]) || (arrayElementInArray( memCodonArr, [c2[0],c2[1],c2[2]] ) ) );
+    console.log('pointMutation - count: ' + count + ', c1[0]+c1[1]+c1[2]: ' + c1[0]+c1[1]+c1[2] + ', c2[0]+c2[1]+c2[2]: ' + c2[0]+c2[1]+c2[2]);
+    
+    return c2;
+}
+
+
+function removeElementIfExist(Tarray, element){
+    console.log('removeElementIfExist - Tarray 1: ' + JSON.stringify(Tarray));
+    for (var i in Tarray){
+        if (Tarray[i] === element) {
+            Tarray.splice(i, 1);
+        }
+    }
+    console.log('removeElementIfExist - Tarray 2: ' + JSON.stringify(Tarray));
+    return Tarray;
+}
+
+
+function arrayElementInArray(tArray, element){
+    for (x in tArray){
+        if (tArray[x].join() == element.join()) {
+            return true;
+        } 
+    }
+    return false;
+}
+console.log("arrayElementInArray([[1,2,3], ['A','C','G','U'], [1,'a',2,'b']], [1,'a',2,'b']): " + arrayElementInArray([[1,2,3], ['A','C','G','U'], [1,'a',2,'b']], [1,'a',2,'b']));
+
+
+function correctAntiCodon(){
+    // $('#dropZone').css({position: 'absolute', left: '50%'});  // <----- NOTE: not needed since this is set in CSS, but is added here for clarity...
+
+    // var startNeucleotideNo = Math.round(20 * 50/100); // <---- 20 neucleotide in the x-direction times 50% = 50/100, because this is the position of the dropZone i the x-direction.
+    var startCodoneNo = dObj.currentCodon-6;  // <--- IPORTANT NOTE: "dObj.currentNucleotide" is always the right-most visible nucleotide (seen relative to the "dnaArr"), whereas startNeucleotideNo is almost in the center for the frame - therefore the "-9" ajustment is needed!
+    var codon = dObj.codonArr[startCodoneNo];
+    console.log('correctmRnaNucleotide - startCodoneNo: ' + startCodoneNo + ', codon: ' + codon);
+
+    var compBase = {"A":"U", "U":"A", "G":"C", "C":"G" };
+    var antiCodon = [compBase[codon[0]], compBase[codon[1]], compBase[codon[2]]];
+    console.log('correct_tRNA - antiCodon: ' + antiCodon);
+
+    return antiCodon;
 }
 
 
@@ -1150,18 +1276,21 @@ function main(){
 
     basicPosCalc();
 
-    $('#translationContainer').append(initTransription());
+    $('#translationContainer').append(initTranslation());
     // ajustScreenHight();
 
     // addDraggableNeucleotides();
+    addDraggable_tRNA();
+    // correctAntiCodon();
+    // makeWrongAntiCodonArr(5);
 
-    tRNA_template(['A','U','G']);
+    // tRNA_template(['U','U','G'], 0, false);
 
     setEventhandlers();
 
     ajustScreenHight();
 
-    getHeightOfDnaNucleotides();
+    // getHeightOfDnaNucleotides();
 
     // brownianMotionInit();   // if (!detectmob()){ 
 }
@@ -1176,7 +1305,7 @@ function main(){
 $(window).on('resize', function() {
     ajustScreenHight();
 
-    getHeightOfDnaNucleotides();
+    // getHeightOfDnaNucleotides();
 });
 
 $(document).ready(function() {

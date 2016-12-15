@@ -13,38 +13,46 @@
 }
 
 .adenin{
-	/*background-color: #990000;*/
+	
 }
 .cytosin{
-	/*background-color: #0000cc;*/
+	
 }
 .guanin{
-	/*background-color: #6666ff;*/
+	
 }
 .thymin, .uracil{
-	/*background-color: #ff3333;*/
+	
 }
 
-.basePairWrap{
-	/*width: 5%;*/
-	width: 2.5%;
+.codonAntiCodonWrap{
+/*	
+	margin-left: -3px;
+    margin-right: -3px;
+	width: 7.65%;
+*/
+/*
+	margin-left: 0px;
+    margin-right: 0px;
+	width: 7.14285%;
+*/
+
+	margin-left: -0.3%;
+    margin-right: -0.3%;
+	width: 7.72%;
+
 	height: 40%;
 	display: inline-block;
 	position: relative;
-	top: 30%;
+	top: 20%;
+	
 }
-/*
-.templateStrand{
-	position: relative;
+
+div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap */
+	margin-left: 0px;
+	background: yellow;
 }
-.codingStrand{
-	position: relative;
-	top: 50%;
-}
-*/
-.codingStrand{
-	position: relative;
-}
+
 .templateStrandWrap{
 	height: 50%;
 	position: relative;
@@ -56,10 +64,10 @@
 }
 
 .neucleotide{
+	display: inline-block;
 	height: 25%;
-	/*border: 1px solid #000;*/
+	width: 33.333%;
 	text-align: center;
-	font-size: 2.5vw;  /*Setting dynamic font-size, see: https://developer.mozilla.org/en-US/docs/Web/CSS/length */
 	padding-left: 0px;
 	padding-right: 0px;
     margin-left: -1px;
@@ -67,14 +75,15 @@
 }
 #dropZone{
 	border-radius: 4px;
-	width: 5%;
-	/*height: 10%;*/
-	height: 11%;
-	border: 2px dashed #FFF;
+	width: 7.5%;
+	height: 40%;
+	/*border: 2px dashed #FFF;*/
+	border: 2px dashed #000;
 	position: absolute; /* This absolute position is possible because of the relative position of its parent (#translationContainer) */
 	/*top: 50%;*/
-	top: 49%;
-	left: 50%;   /* <--- IMPORTANT - THIS VALUE IS SET INLINE BY JQuery in "correctmRnaNucleotide()"! NOTE: 50% = 5%*10 */
+	top: 25%;
+	/*left: 49.5%;*/   /* <--- IMPORTANT - THIS VALUE IS SET INLINE BY JQuery in "correctmRnaNucleotide()"! NOTE: 50% = 5%*10 */
+	left: 64%;
 	z-index: 0;
 	/*background-color: #f8f8f6;*/
 }
@@ -118,45 +127,6 @@
 	z-index: 15;
 }
 
-.templateStrandWrap{
-	/*border: 1px solid #F00;*/
-}
-.templateStrand.thymin{
-	
-}
-
-.templateStrand.cytosin{
-	
-}
-
-.templateStrand.guanin{
-	/*position: absolute;*/
-	
-}
-.templateStrand.adenin{
-	/*position: absolute;*/
-	
-}
-
-.mRNA_string{
-	/*position: relative;*/
-	z-index: 0;
-}
-
-.mRNA_string.uracil{
-
-}
-
-.mRNA_string.cytosin{
-
-}
-
-.mRNA_string.guanin{
-
-}
-.mRNA_string.adenin{
-
-}
 
 .neucleotide {
   -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -174,45 +144,103 @@
 }
 
 .draggable_tRNA{
-	display: inline-block;
-	width: 25%;
-	position: relative;;
+	/*display: inline-block;*/
+	width: 20%;
+	height: 60%;
+	/*position: absolute;*/
+	/*height: 50%;*/
 }
 
 .tRNA_body{
 	position: relative;
+	height: 100%;
 }
 
 .tRNA_img{
-	position: relative;
+	position: absolute;
 	z-index: 0;
+	top: 11%;
 }
 
+
 .tRNA_antiCodon_Wrap{
-	display: inline-block;
-	padding-left: 35%;
+	
 	position: relative;
-	z-index: 0;
+	z-index: 1;
+	width: 100%;
+	position: relative;
+	top: 2%;
+	left: 10%;
+	padding-left: 31%;
 }
+
 
 .antiCodon{
 	display: inline-block;
-	width: 13%;
+	width: 18.666%;
+
+	margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
+
+   /* width: 2.5%;*/
 }
 
 .antiCodon.uracil{
-	 padding-top: 0%;
+	 /*padding-top: 6%;*/
 }
 
 .antiCodon.cytosin{
-	padding-top: 2%;
+	/*padding-top: 6%;*/
 }
 
 .antiCodon.guanin{
-	padding-top: 2%;
+	/*padding-top: 6%;*/
 }
 .antiCodon.adenin{
-	margin-top: 2%;
+	/*margin-top: 2%;*/
 	position: relative;
-	top: 16%;
+	/*top: 6%;*/
 }
+
+.antiCodonBase1{
+	/*margin-left: 30%;*/
+}
+
+
+.aminoAcid {
+	display: inline-block;
+	border-radius: 30px; 
+	padding: 8% 16%; 
+	font-size: 1em;
+	font-weight: 800;
+	position: relative;
+	z-index: 1;
+	margin-top: 95%;
+	margin-left: 25%;
+}		
+
+.draggable_tRNA .alanin{ background-color: #754277;  color: #FFF;}        
+.draggable_tRNA .arginin{ background-color: #7CC424;}       
+.draggable_tRNA .asparagin{ background-color: #156AFA;  color: #FFF;}		
+.draggable_tRNA .asparaginsyre{ background-color: #E4761F;}
+.draggable_tRNA .cystein{ background-color: #2DFEFD;}
+.draggable_tRNA .glutamin{ background-color: #FB101B;}
+.draggable_tRNA .glutaminsyre{ background-color: #C5945F;}
+.draggable_tRNA .glycin{ background-color: #CC68D4;}		
+.draggable_tRNA .histidin{ background-color: #1FC690;}
+.draggable_tRNA .isoleucin{ background-color: #E56455;}
+.draggable_tRNA .leucin{ background-color: #C2F2A9;}
+.draggable_tRNA .lysin{ background-color: #EF6CAF;}	
+.draggable_tRNA .methionin{ 
+	/*background-color: #E6B4A8;*/
+	background-color: #73f9a9;
+}
+.draggable_tRNA .fenylalanin{ background-color: #3C8213; color: #FFF;}
+.draggable_tRNA .prolin{ background-color: #978D71;}		
+.draggable_tRNA .serin{ background-color: #2F7985;  color: #FFF;}			
+.draggable_tRNA .threonin{ background-color: #82F8B3;}
+.draggable_tRNA .tryptofan{ background-color: #999AD3;}
+.draggable_tRNA .tyrosin{ background-color: #063E77;  color: #FFF;}
+.draggable_tRNA .valin{ background-color: #F8F135;}
