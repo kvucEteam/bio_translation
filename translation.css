@@ -6,6 +6,7 @@
 	position: relative;  /* This is needed because of the absolute position of the dropzone */
 	/*background-image: url("img/sphere.jpg");*/
 	/*background-color: #454E4F;*/
+	overflow: hidden;
 }
 .backgroundImg{
 	position: absolute; 
