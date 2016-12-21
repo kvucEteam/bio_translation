@@ -5,12 +5,20 @@
 //
 // Biological naming convension:
 //
-//          5'  ACTGGACTACTGGACTGACT  3'  // Coding standdObj.
+//          5'  ACTGGACTACTGGACTGACT  3'  // Coding stand
 //          3'  TGACCTGATGACCTGACTGA  5'  // Template stand
 //                   -------->            // RNA polymerase movement on the template strand (aka. "downstream" relative to both DNA and mRNA)
 //                        |
 //                   starting base in this particular setup (the JSON-data)
 
+//     CODON   |    DNA    | mRNA | 
+// --------------------------------
+//             | code| tmpl|
+// --------------------------------         
+// Start codon | ATG | TAC | AUG  |
+// Stop codon  | TGA | ACT | UGA  |
+// Stop codon  | TAA | ATT | UAA  |
+// Stop codon  | TAG | ATC | UAG  |
 
 // var dna = 'ACTGGACTACTGGACTGACT';  // codingStrand
 
