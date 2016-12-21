@@ -86,13 +86,13 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 }
 
 .codonAntiCodonWrap .aminoAcid {
-	border-radius: 30px; 
-	padding: 4% 8%; 
+	border-radius: 50%; 
+	padding: 12.2%; 
 	font-size: 1em;
 	font-weight: 800;
 	position: relative;
 	z-index: 1;
-	margin-left: 33%;
+	margin-left: 28%;
     margin-top: 95%;
 }
 
@@ -257,14 +257,14 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 
 .aminoAcid {
 	display: inline-block;
-	border-radius: 30px; 
-	padding: 8% 16%; 
+	border-radius: 50%; 
+	padding: 12.2%; 
 	font-size: 1em;
 	font-weight: 800;
 	position: relative;
 	z-index: 1;
 	margin-top: 95%;
-	margin-left: 25%;
+	margin-left: 28%;
 }		
 
 .draggable_tRNA .alanin{ background-color: #754277;  color: #FFF;}        

@@ -20,8 +20,20 @@
 // http://hyperphysics.phy-astr.gsu.edu/hbase/Organic/translation.html
 // http://classes.midlandstech.edu/carterp/Courses/bio225/chap08/Microbial%20Genetics%203.htm
 
+
+// Molecular and Cellular Biology Animations: Development and Impact on Student Learning - Phillip McClean
+// https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1103718/
+
+// Phillip E. McClean
+// https://www.ag.ndsu.edu/plantsciences/people/faculty/mcclean
+
 // Translation - 50 sek:
 // https://www.youtube.com/watch?v=5bLEDd-PSTQ
+// http://vcell.ndsu.edu/animations/translation/movie-flash.htm
+
+
+
+
 
 
 
