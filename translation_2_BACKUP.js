@@ -480,8 +480,7 @@ function anmateDnaMovement(){
 
         // $('#translationContainer').append(returnDnaBasePair(dObj.currentNucleotide));  // <----- Append the new basepair - then set the width to 0%!!!
         console.log('anmateDnaMovement - dObj.currentCodon: ' + dObj.currentCodon + '\ndObj.codonArr[dObj.currentCodon]): ' + dObj.codonArr[dObj.currentCodon] + '\ndObj.codonArr: ' + JSON.stringify(dObj.codonArr[dObj.currentCodon]));
-        
-        // $('#translationContainer').append(returnCodonAntiCodonWrap(dObj.codonArr[dObj.currentCodon]));  // <----- Append the new basepair - then set the width to 0%!!!
+        $('#translationContainer').append(returnCodonAntiCodonWrap(dObj.codonArr[dObj.currentCodon]));  // <----- Append the new basepair - then set the width to 0%!!!
         
 
             //NB : ato
@@ -492,7 +491,7 @@ function anmateDnaMovement(){
 
         //NB : ato
         $(".codonAntiCodonWrap").animate({
-            left: '-=7.72%'
+            left: '-=8%'
                 // duration: 400
         }, 400, function() {
 
@@ -920,16 +919,11 @@ function initTranslation(){
     dObj.currentCodon = 14; // <---- This is the the number of codons across the viewport, the rest will be added one-by-one as a correct tRNA is placed in the dropzone.
     console.log('initTranslation - dObj.codonArr: ' + JSON.stringify(dObj.codonArr) + ', dObj.currentCodon: ' + dObj.currentCodon);
 
-    HTML += '<div id="mRNA_container">';
-
-    // for (var i = 0; i < dObj.currentCodon; i++) {
-    for (var i = 0; i < dObj.numOfCodons; i++) {
+    for (var i = 0; i < dObj.currentCodon; i++) {
         var codon = dObj.codonArr[i];
         console.log('initTranslation - i: ' + i + ', codon: ' + codon);
         HTML += returnCodonAntiCodonWrap(codon);
     };
-
-    HTML += '</div>';
 
     HTML += '<div class="fadeOut fadeOut_right"></div>';
     // HTML += '<div class="Clear"></div>';

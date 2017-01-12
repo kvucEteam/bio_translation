@@ -7,7 +7,8 @@
 	/*background-image: url("img/sphere.jpg");*/
 	/*background-color: #454E4F;*/
 
-	overflow: hidden;  /* <---------  Denne skaber fejl!!!  */
+	overflow: hidden;   /* <----- ATO */
+
 }
 .backgroundImg{
 	position: absolute; 
@@ -52,9 +53,8 @@
 }
 
 div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap */
-	/*margin-left: 0px;*/
-	margin-left: 2px;
-	/*background: yellow;*/
+	margin-left: 0px;
+	background: yellow;
 }
 
 
@@ -63,9 +63,8 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 	position: absolute;
 	width: 254%;
 	height: 100%;
-	top: 12%;
-	left: -110%;
-	z-index: 1;
+	top: 27%;
+	left: -110%
 }
 
 .codonAntiCodonWrap .tRNA_antiCodon_Wrap {
@@ -91,8 +90,8 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 
 .codonAntiCodonWrap .aminoAcid {
 	border-radius: 50%; 
-	padding: 13.2%; 
-	/*font-size: 1em;*/
+	padding: 12.2%; 
+	font-size: 1em;
 	font-weight: 800;
 	position: relative;
 	z-index: 1;
@@ -189,28 +188,24 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 											TRANSLATION  CODE
 ************************************************************************************************************/
 
+#mRNA_container{
+	display: flex;
+    height: 40%;
+    width: 150%;
+    margin-top: 13%;
+}
+
 .container-fluid{
 	position: relative;
 }
 
-.draggable_tRNA, #tRNA_free{
+.draggable_tRNA{
 	/*display: inline-block;*/
 	width: 20%;
 	height: 60%;
 	/*position: absolute;*/
 	/*height: 50%;*/
 }
-
-.reduceSize {
-	height: 42%;  	/* 60% * 0.7 = 42% */
-    width: 14%; 	/* 20% * 0.7 = 14% */
-}
-
-
-#tRNA_free {
-
-}
-
 
 .tRNA_body{
 	position: relative;
@@ -233,7 +228,6 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 	/*left: 10%;*/
 	padding-left: 41.2%;
 }
-
 
 
 .antiCodon{
@@ -272,191 +266,37 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 
 
 .aminoAcid {
-	/*width: 36.5%;*/
 	display: inline-block;
 	border-radius: 50%; 
-	padding: 13.2%; 
+	padding: 12.2%; 
 	font-size: 1em;
 	font-weight: 800;
 	position: relative;
 	z-index: 1;
-	/*margin-top: 95%;*/
-	margin-top: 100%;
+	margin-top: 95%;
 	margin-left: 28%;
-}
-
-.aminoAcid_free{
-	/*width: 5%;*/
-	display: inline-block;
-	border-radius: 50%; 
-	padding: 2.5%; 
-	font-size: 1em;
-	font-weight: 800;
-	position: absolute;
-	z-index: 1;
-
-	top: 100%;
-	left: -42%;
-	padding: 33.5%; 
 }		
 
-.tRNA .alanin, .aminoAcid_free.alanin{ background-color: #754277;  color: #FFF;}        
-.tRNA .arginin, .aminoAcid_free.arginin{ background-color: #7CC424;}       
-.tRNA .asparagin, .aminoAcid_free.asparagin{ background-color: #156AFA;  color: #FFF;}		
-.tRNA .asparaginsyre, .aminoAcid_free.asparaginsyre{ background-color: #E4761F;}
-.tRNA .cystein, .aminoAcid_free.cystein{ background-color: #2DFEFD;}
-.tRNA .glutamin, .aminoAcid_free.glutamin{ background-color: #FB101B;}
-.tRNA .glutaminsyre, .aminoAcid_free.glutaminsyre{ background-color: #C5945F;}
-.tRNA .glycin, .aminoAcid_free.glycin{ background-color: #CC68D4;}		
-.tRNA .histidin, .aminoAcid_free.histidin{ background-color: #1FC690;}
-.tRNA .isoleucin, .aminoAcid_free.isoleucin{ background-color: #E56455;}
-.tRNA .leucin, .aminoAcid_free.leucin{ background-color: #C2F2A9;}
-.tRNA .lysin, .aminoAcid_free.lysin{ background-color: #EF6CAF;}	
-.tRNA .methionin, .aminoAcid_free.methionin{ 
+.draggable_tRNA .alanin{ background-color: #754277;  color: #FFF;}        
+.draggable_tRNA .arginin{ background-color: #7CC424;}       
+.draggable_tRNA .asparagin{ background-color: #156AFA;  color: #FFF;}		
+.draggable_tRNA .asparaginsyre{ background-color: #E4761F;}
+.draggable_tRNA .cystein{ background-color: #2DFEFD;}
+.draggable_tRNA .glutamin{ background-color: #FB101B;}
+.draggable_tRNA .glutaminsyre{ background-color: #C5945F;}
+.draggable_tRNA .glycin{ background-color: #CC68D4;}		
+.draggable_tRNA .histidin{ background-color: #1FC690;}
+.draggable_tRNA .isoleucin{ background-color: #E56455;}
+.draggable_tRNA .leucin{ background-color: #C2F2A9;}
+.draggable_tRNA .lysin{ background-color: #EF6CAF;}	
+.draggable_tRNA .methionin{ 
 	/*background-color: #E6B4A8;*/
 	background-color: #73f9a9;
 }
-.tRNA .fenylalanin, .aminoAcid_free.fenylalanin{ background-color: #3C8213; color: #FFF;}
-.tRNA .prolin, .aminoAcid_free.prolin{ background-color: #978D71;}		
-.tRNA .serin, .aminoAcid_free.serin{ background-color: #2F7985;  color: #FFF;}			
-.tRNA .threonin, .aminoAcid_free.threonin{ background-color: #82F8B3;}
-.tRNA .tryptofan, .aminoAcid_free.tryptofan{ background-color: #999AD3;}
-.tRNA .tyrosin, .aminoAcid_free.tyrosin{ background-color: #063E77;  color: #FFF;}
-.tRNA .valin, .aminoAcid_free.valin{ background-color: #F8F135;}
-
-
-#curvatureSquare{
-
-}
-
-
-/*#codonAntiCodonWrap_container{
-	position: absolute;
-	width: 100%;
-}*/
-
-
-/***************************************************************************************************************************************   
-														LABELS IN START OVERLAY   
-****************************************************************************************************************************************/
-
-
-#ribosome_largeUnit {
-    position: absolute;
-    left: 76%;
-    top: 73%;
-    z-index: 2;
-}
-
-
-#ribosome_smallUnit {
-    position: absolute;
-    left: 76%;
-    top: 14%;
-    z-index: 2;
-}
-
-
-#tRNA_label {
-    position: absolute;
-    left: 45%;
-    top: 47%;
-    z-index: 2;
-}
-
-
-#mRNA_label{
-    position: absolute;
-    left: 20%;
-    top: 20%;
-    z-index: 2;
-}
-
-#aminoAcid_label{
-    position: absolute;
-    left: 48%;
-    top: 68%;
-    z-index: 2;
-}
-
-#startCodon_label {
-	position: absolute;
-    left: 56.5%;
-    top: 20%;
-    z-index: 2;
-}
-
-#antiCodon_label {
-	position: absolute;
-    left: 56.7%;
-    top: 33%;
-    z-index: 2;
-}
-
-#dropzone_label{
-	position: absolute;
-	left: 80%;
-	top: 50%;
-	z-index: 2;
-}
-
-
-#startBtn{
-	position: absolute;
-	right: 2%;
-	bottom: 5%;
-	z-index: 11;
-	margin-bottom: 0px;
-}
-
-
-.overlayPressed{
-	border: 1px solid #05a0a8;
-}
-
-/*
-#translationContainer.ajustment #codonAntiCodonWrap_0{
-	background-color: yellow;
-}
-*/
-
-
-
-/***************************************************************************************************************************************   
-															MEDIA QUERIES   
-****************************************************************************************************************************************/
-
-
-@media all and (max-width: 1170px) {
-    
-    .aminoAcid, .aminoAcid_free {
-    	font-size: 1.2vw;
-    }
-
-    .start_label {
-        font-size: 1.3vw;
-        color: #333;
-        font-weight: 400;
-    }
-
-    #startBtn{
-    	font-size: 1.5vw;
-    }
-}
-
-@media all and (min-width: 1171px) {
-    .aminoAcid, .aminoAcid_free {
-        font-size: 14px;
-    }
-
-    .start_label {
-        font-size: 14px;
-        color: #333;
-        font-weight: 400;
-    }
-
-    #startBtn{
-    	font-size: 20px;
-    }
-}
-
+.draggable_tRNA .fenylalanin{ background-color: #3C8213; color: #FFF;}
+.draggable_tRNA .prolin{ background-color: #978D71;}		
+.draggable_tRNA .serin{ background-color: #2F7985;  color: #FFF;}			
+.draggable_tRNA .threonin{ background-color: #82F8B3;}
+.draggable_tRNA .tryptofan{ background-color: #999AD3;}
+.draggable_tRNA .tyrosin{ background-color: #063E77;  color: #FFF;}
+.draggable_tRNA .valin{ background-color: #F8F135;}
