@@ -63,7 +63,8 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 	position: absolute;
 	width: 254%;
 	height: 100%;
-	top: 12%;
+	/*top: 12%;*/
+	top: 12.5%;
 	left: -110%;
 	z-index: 1;
 }
@@ -78,7 +79,9 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 
 	padding-left: 43%;
 	position: relative;
-    top: -1%;
+    
+    /*top: -1%;*/
+    top: 1%;
 }
 
 .codonAntiCodonWrap .antiCodon {
@@ -236,7 +239,8 @@ div.codonAntiCodonWrap:nth-child(4){   /* This is the first .codonAntiCodonWrap 
 	position: relative;
 	z-index: 1;
 	width: 100%;
-	top: 3%;
+	/*top: 3%;*/
+	top: 4%;
 	/*left: 10%;*/
 	padding-left: 41.2%;
 }

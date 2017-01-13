@@ -1,0 +1,6 @@
+{
+	"header" : "Translation",
+	"instruction" : "Syntetisér dit eget protein: Tryk på start, find det rigtige tRNA og træk det hen til den markerede plads i ribosomet.",
+	"explanation" : "Når mRNA skal oversættes til protein, sker det på ribosomer i cytoplasma. Hver enkelt aminosyre transporteres hen til mRNA-strengen ved hjælp af et tRNA-molekyle. I den ene ende af hvert tRNA findes tre nukleotider (et anticodon), som via baseparringsprincippet passer præcist til et bestemt codon på mRNA-strengen. I den anden ende af tRNA sidder netop den aminosyre, som det codon koder for. På den måde oversættes den specifikke mRNA-sekvens til en bestemt aminosyresekvens.",
+	"mRNA": "UGCCUCGUGGACUGGCUACACACAAUGUGCGACGAAGACGAGACCACCGCCCUCGUGUGCGACAAUGGCUCCGGCCUGGUGAAAGCC"
+}

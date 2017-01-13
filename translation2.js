@@ -61,10 +61,10 @@ var bioObj = {
         },
         tRNA : {
             img: { 
-                A : {name:"Adenin", class:"adenin mRNA", src: {down: 'ao.png', up: 'an.png'}},
-                C : {name:"Cytosin",class:"cytosin mRNA", src: {down: 'co.png', up: 'cn.png'}},
-                G : {name:"Guanin", class:"guanin mRNA", src: {down: 'go.png', up: 'gn.png'}},
-                U : {name:"Uracil", class:"uracil mRNA", src: {down: 'uo.png', up: 'un.png'}}
+                A : {name:"Adenin", class:"adenin mRNA", src: {down: 'aoh.png', up: 'anh.png'}},
+                C : {name:"Cytosin",class:"cytosin mRNA", src: {down: 'coh.png', up: 'cnh.png'}},
+                G : {name:"Guanin", class:"guanin mRNA", src: {down: 'goh.png', up: 'gnh.png'}},
+                U : {name:"Uracil", class:"uracil mRNA", src: {down: 'uoh.png', up: 'unh.png'}}
             },
             U : {
                 U: {
@@ -1603,7 +1603,7 @@ function main(){
 
     setEventhandlers();
 
-    brownianMotionInit();   
+    // brownianMotionInit();   
 
 
     // =============  TEST  ====================
