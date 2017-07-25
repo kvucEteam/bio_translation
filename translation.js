@@ -43,7 +43,7 @@
 // http://stackoverflow.com/questions/18735723/animate-circles-on-circular-path
 
 
-
+var score = 0; 
 
 var bioObj = {
         
@@ -176,7 +176,7 @@ var bioObj = {
 function init_dObj(){
     window.dObj = {
         duration: 1000,  // Average animation time in Brownian motion
-        length: 0.05,    // Maximal length in percent relative to screen height or width in Brownian motion animation.
+        length: 0.005,    // Maximal length in percent relative to screen height or width in Brownian motion animation.
         wrongFeedbackTriggered: false,
         idOfWronglyMovedNeucleotide: null,
         idOfLastMoved_tRNA: null
@@ -868,6 +868,10 @@ function setEventhandlers(){
                 //     $('#draggable_tRNA_'+id).hide();
                 // }
 
+
+                  score ++;
+
+        $(".score_cont").html("Score: "+score+" / "+dObj.codonArr.length / 2);
 
                 console.log('setEventhandlers - dObj.currentCodon: ' + dObj.currentCodon);
                 // $(".codonAntiCodonWrap").eq(dObj.currentCodon-4).append(SimpleClone($(this)).addClass("tRNA_complex"));   // Append the cloned draggable to dropzone
@@ -1622,12 +1626,15 @@ function main(){
     // $('.codonAntiCodonWrap').eq(7).append(SimpleClone(tRNA_template(['C','A','C'], 11, true)));
     // $('.codonAntiCodonWrap').eq(8).append(SimpleClone(tRNA_template(['G','C','U'], 12, true)));
 
-
+score = 0; 
+$('#translationContainer').prepend("<div class='score_cont'>Score: "+score+" / "+Math.round(dObj.codonArr.length / 2)+"</div>");
 }
 
 
 
 function makeStartOverlay() {
+
+
 
     // Resources for names on the start-overlay:
     // =========================================
@@ -1707,6 +1714,7 @@ function makeStartOverlay() {
         $('#translationContainer').html(''); // Clear all content.
         main();
         $('.draggable_neucleotide').hide().fadeIn();
+        microhint($("#dropZone"), "Find det rigtige tRNA og træk det hertil");
     });
 
 
@@ -1720,6 +1728,10 @@ function makeStartOverlay() {
         console.log('#translationContainer - MOUSEUP');
         $('#startBtn').removeClass('vuc-primary-hover overlayPressed');
     });
+
+
+        //microhint($("#ribosome_largeUnit"), "Orientér dig i ribosomet og klik på START når du er klar til opgaven.");
+        microhint($("#startBtn"), "Orientér dig i ribosomet og klik på START når du er klar til opgaven.");
 }
 
 
