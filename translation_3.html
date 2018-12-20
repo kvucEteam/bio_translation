@@ -44,7 +44,41 @@
         one_line_footer();
     });
 
+    function iframeResize() {
+        console.log("Resizing")
+        
 
+        var height = $('body').outerHeight(); // IMPORTANT: If body's height is set to 100% with CSS this will not work.
+        console.log("height:  " + height);
+        postMessage("resize::" + (height + 5), "*");
+        //var pathname = window.location.pathname;
+        /*var url = window.location.pathname;
+        parent.postMessage("resizde::" + height + "url::" + url, "*");
+        */
+
+    }
+
+    $(document).ready(function() {
+        
+        setInterval(iframeResize, 200);
+    });
+
+    var iframe_height;
+
+var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+  var eventer = window[eventMethod];
+  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+  eventer(messageEvent,function(e) {
+
+    console.log("e.data: " + e.data);
+    // If the message is a resize frame request
+    if (e.data.indexOf('resize::') != -1) {
+      var height = e.data.replace('resize::', '');
+      parent.document.getElementById('vuc_frame').style.height = height+'px';
+      //document.getElementsByTagName('iframe')[0].style.height = height+'px';
+    }
+  } ,false);
     </script>
 </body>
 
